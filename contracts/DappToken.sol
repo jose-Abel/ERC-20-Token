@@ -9,6 +9,8 @@ contract DappToken {
 
     uint256 public totalSupply;
 
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
     mapping(address => uint256) public balanceOf;
 
     constructor(uint256 _initialSupply) public {
@@ -25,5 +27,7 @@ contract DappToken {
         balanceOf[msg.sender] -= _value;
 
         balanceOf[_to] += _value;
+
+        emit Transfer(msg.sender, _to, _value);
     }
 }

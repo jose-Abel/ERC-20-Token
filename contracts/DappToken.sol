@@ -19,6 +19,8 @@ contract DappToken {
 
     mapping(address => uint256) public balanceOf;
 
+    mapping(address => mapping(address => uint256)) public allowance;
+
     constructor(uint256 _initialSupply) public {
         balanceOf[msg.sender] = _initialSupply;
         totalSupply = _initialSupply;
@@ -43,7 +45,10 @@ contract DappToken {
         public
         returns (bool success)
     {
+        allowance[msg.sender][_spender] = _value;
+
         emit Approval(msg.sender, _spender, _value);
+
         return true;
     }
 }

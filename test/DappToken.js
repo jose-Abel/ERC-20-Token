@@ -77,7 +77,7 @@ contract("DappToken", function(accounts) {
     }).then(function(success){
       assert.equal(success, true, "it returns true");
 
-      return tokenInstance.approve(accounts[1], 100);
+      return tokenInstance.approve(accounts[1], 100, {from: accounts[0]});
     }).then(function(receipt) {
       assert.equal(receipt.logs.length, 1, "triggers one event");
 
@@ -89,7 +89,11 @@ contract("DappToken", function(accounts) {
 
       assert.equal(receipt.logs[0].args._value, 100, "logs the transfer amount");
       
-      
+      return tokenInstance.allowance(accounts[0], accounts[1]);
+    }).then(function(allowance) {
+      assert.equal(allowance.toNumber(), 100, "store the allowance for delegated transfer");
+
+
     })
   })
 });

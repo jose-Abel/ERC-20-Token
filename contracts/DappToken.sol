@@ -11,6 +11,12 @@ contract DappToken {
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
+    event Approval(
+        address indexed _owner,
+        address indexed _spender,
+        uint256 _value
+    );
+
     mapping(address => uint256) public balanceOf;
 
     constructor(uint256 _initialSupply) public {
@@ -37,6 +43,7 @@ contract DappToken {
         public
         returns (bool success)
     {
+        emit Approval(msg.sender, _spender, _value);
         return true;
     }
 }

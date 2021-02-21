@@ -15,4 +15,8 @@ contract DappToken {
         balanceOf[msg.sender] = _initialSupply;
         totalSupply = _initialSupply;
     }
+
+    function transfer(address _to, uint256 _value) public {
+        require(balanceOf[msg.sender] >= _value);
+    }
 }

@@ -140,6 +140,10 @@ contract("DappToken", function(accounts) {
       return tokenInstance.balanceOf(toAccount);
     }).then(function(balance) {
       assert.equal(balance.toNumber(), 10, "adds the amount from the receiving account");
+
+      return tokenInstance.allowance(fromAccount, spendingAccount);
+    }).then(function(allowance) {
+      assert.equal(allowance.toNumber(), 0, "deducts the amount from the allowance");
     })
   });
 });

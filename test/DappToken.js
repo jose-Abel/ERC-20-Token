@@ -144,6 +144,6 @@ contract("DappToken", function(accounts) {
       return tokenInstance.allowance(fromAccount, spendingAccount);
     }).then(function(allowance) {
       assert.equal(allowance.toNumber(), 0, "deducts the amount from the allowance");
-    })
+    });
   });
 });

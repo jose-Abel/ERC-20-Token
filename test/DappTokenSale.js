@@ -34,7 +34,7 @@ contract("DappTokenSale", function(accounts) {
   it("facilitates token buying", function() {
 
     return DappToken.deployed().then(function(instance) {
-      tokenInstance = instance
+      tokenInstance = instance;
 
       return DappTokenSale.deployed();
     }).then(function(instance) {
@@ -77,4 +77,29 @@ contract("DappTokenSale", function(accounts) {
     })
   });
 
+  it("ends token sale", function() {
+
+    return DappToken.deployed().then(function(instance) {
+      tokenInstance = instance
+
+      return DappTokenSale.deployed();
+    }).then(function(instance) {
+      tokenSaleInstance = instance;
+
+      return tokenSaleInstance.endSale({from: buyer});
+    }).then(assert.fail).catch(function(err) {
+      assert(err.message.indexOf('revert' >= 0, "must be admin to end sale"));
+
+      return tokenSaleInstance.endSale({ from: admin });
+    }).then(function(receipt) {
+      
+      return tokenInstance.balanceOf(admin);
+    }).then(function(balance){
+      assert.equal(balance, 999990, "returns all unsold dapp tokens to the admin");
+
+      return tokenInstance.balanceOf(tokenSaleInstance.address);
+    }).then(function(balance){
+      assert.equal(balance.toNumber(), 0, "token price was reset");
+    });
+  });
 }); 

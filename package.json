@@ -1,0 +1,17 @@
+{
+  "name": "token_sale",
+  "version": "1.0.0",
+  "description": "Dapp Token Sale ICO",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "author": "Jose Abel Ramirez Frontany",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  }
+}

@@ -2,6 +2,7 @@ App = {
   web3Provider: null,
   contracts: [],
   account: "0x0",
+  loading: false,
 
   init: function() {
     console.log("App initialized...")
@@ -44,17 +45,38 @@ App = {
   },
 
   render: function() {
+    if(App.loading) {
+      return;
+    }
+
+    App.loading = true;
+
+    var loader = $("#loader");
+    var content = $("#content");
+
+    loader.show();
+    content.hide();
+
     web3.eth.getCoinbase(function(err, account) {
       if(err === null) {
         App.account = account;
         $("#accountAddress").html("Your Account: " + account);
       }
-    })
+    });
+
+    App.contracts.DappTokenSale.deployed().then(function(instance) {
+      dappTokenSaleInstance = instance;
+      return dappTokenSaleInstance;
+    });
+
+    App.loading = false;
+    loader.hide();
+    content.show();
   } 
 }
 
 $(function() {
   $(window).load(function() {
     App.init();
-  })
+  });
 });

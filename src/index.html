@@ -25,10 +25,10 @@
           Token price is <span class="token-price"></span> Ether. You currently have <span class="dapp-balance"></span>&nbsp;DAPP
         </p>
         <br />
-        <form role="form">
+        <form onsubmit="App.buyTokens(); return fase;" role="form">
           <div class="form-group">
             <div class="input-group">
-              <input id="numberOfToken"
+              <input id="numberOfTokens"
               class="form-control input-lg"
               type="number" name="number" value="1" 
               min="1" 

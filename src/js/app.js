@@ -103,7 +103,29 @@ App = {
         content.show();
       });
     });
-  } 
+  },
+
+  buyTokens: function() {
+    $("#content").hide();
+    $("#loader").show();
+
+    var numberOfTokens = $("#numberOfTokens").val();
+
+    App.contracts.DappTokenSale.deployed().then(function(instance){
+
+      return instance.buyTokens(numberOfTokens, {
+        from: App.account,
+        value: numberOfTokens * App.tokenPrice,
+        gas:50000
+      });
+    }).then(function(result){
+      console.log("Tokens bought...")
+      $("form").trigger("reset");
+
+      $("#loader").hide();
+      $("#content").show();
+    });
+  }
 }
 
 $(function() {

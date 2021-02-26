@@ -3,6 +3,9 @@ App = {
   contracts: [],
   account: "0x0",
   loading: false,
+  tokenPrice: 1000000000000000,
+  tokensSold: 0,
+  tokensAvailable: 750000,
 
   init: function() {
     console.log("App initialized...")
@@ -64,14 +67,42 @@ App = {
       }
     });
 
+    // Load token sale contract
     App.contracts.DappTokenSale.deployed().then(function(instance) {
       dappTokenSaleInstance = instance;
-      return dappTokenSaleInstance;
-    });
+      
+      return dappTokenSaleInstance.tokenPrice();
+    }).then(function(tokenPrice) {
+      App.tokenPrice = tokenPrice;
 
-    App.loading = false;
-    loader.hide();
-    content.show();
+      $(".token-price").html(web3.fromWei(App.tokenPrice, "ether").toNumber());
+
+      return dappTokenSaleInstance.tokensSold();
+    }).then(function(tokensSold){
+      App.tokensSold = tokensSold.toNumber();
+
+      $(".tokens-sold").html(App.tokensSold);
+
+      $(".tokens-available").html(App.tokensAvailable);
+
+      var progressPercent = (App.tokensSold / App.tokensAvailable) * 100;
+
+      $("#progress").css("width", progressPercent + "%");
+
+      // Load token contract
+      App.contracts.DappToken.deployed().then(function(instance) {
+        dappTokenInstance = instance;
+
+        return dappTokenInstance.balanceOf(App.account);
+      }).then(function(balance){
+
+        $(".dapp-balance").html(balance.toNumber());
+
+        App.loading = false;
+        loader.hide();
+        content.show();
+      });
+    });
   } 
 }
 

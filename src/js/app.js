@@ -79,6 +79,9 @@ App = {
     web3.eth.getCoinbase(function(err, account) {
       if(err === null) {
         App.account = account;
+
+        console.log("App.account", App.account);
+
         $("#accountAddress").html("Your Account: " + account);
       }
     });
@@ -112,7 +115,7 @@ App = {
         return dappTokenInstance.balanceOf(App.account);
       }).then(function(balance){
         
-        $(".dapp-balance").html(balance.toNumber);
+        $(".dapp-balance").html(balance.toNumber());
 
         App.loading = false;
         loader.hide();

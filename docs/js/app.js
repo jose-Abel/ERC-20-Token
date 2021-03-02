@@ -63,7 +63,7 @@ App = {
     })
   },
 
-  render: function() {
+  render: async function() {
     if(App.loading) {
       return;
     }
@@ -76,12 +76,13 @@ App = {
     loader.show();
     content.hide();
 
-    web3.eth.getCoinbase(function(err, account) {
-      if(err === null) {
-        App.account = account;
-        $("#accountAddress").html("Your Account: " + account);
-      }
-    });
+    account = await web3.eth.accounts[0];
+
+    if(account) {
+      App.account = account;
+
+      $("#accountAddress").html("Your Account: " + account);
+    }
 
     // Load token sale contract
     App.contracts.DappTokenSale.deployed().then(function(instance) {
@@ -106,13 +107,19 @@ App = {
       $("#progress").css("width", progressPercent + "%");
 
       // Load token contract
-      App.contracts.DappToken.deployed().then(function(instance) {
-        dappTokenInstance = instance;
+      App.contracts.DappToken.deployed().then(async function(instance) {
+        dappTokenInstance = instance;      
 
-        return dappTokenInstance.balanceOf(App.account);
-      }).then(function(balance){
+        const balance = await dappTokenInstance.balanceOf(App.account);
 
-        $(".dapp-balance").html(balance.toNumber());
+        if(balance) {
+          $(".dapp-balance").html(balance.toNumber());
+        }
+        else {
+          console.log("balance is undefined");
+
+          $(".dapp-balance").html("0");
+        }
 
         App.loading = false;
         loader.hide();

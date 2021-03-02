@@ -111,8 +111,8 @@ App = {
 
         return dappTokenInstance.balanceOf(App.account);
       }).then(function(balance){
-
-        $(".dapp-balance").html(balance.toNumber());
+        
+        $(".dapp-balance").html(balance.toNumber);
 
         App.loading = false;
         loader.hide();

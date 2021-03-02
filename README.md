@@ -35,6 +35,8 @@ To interact with the live version can get the Metamask wallet and change the set
 
 ## Live version
 
+https://jose-abel-dapp-token.netlify.app/
+
 ## Setup
 
 After getting the files, in the root directory type the commands:

@@ -1,6 +1,6 @@
 # ERC-20 Token
 
-Smart contract project built in the Rinkeby Test Network for Ethereum. The contract consist on building a token with the ERC-20 implementation for building fungible tokens on the ethereum virtual machine.
+Smart contract project built in the Rinkeby Test Network for Ethereum. The contract consist on building a token with the ERC-20 implementation for building fungible tokens on the ethereum virtual machine and a smart contract for the token sale.
 
 ![screenshot](./app_screenshot.png)
 
@@ -12,9 +12,11 @@ Smart contract project built in the Rinkeby Test Network for Ethereum. The contr
 - ReactDOM
 - Web3 1.0.0-beta.26
 - Ganache
+- truffle-hdwallet-provider
 - Rinkeby Test Network
 - Metamask Wallet
 - go-ethereum
+- lite-server
 
 ## Author
 
@@ -23,11 +25,29 @@ Smart contract project built in the Rinkeby Test Network for Ethereum. The contr
 
 ## Getting Started
 
+To download the project either can do it with with git clone command:
+
+git clone https://github.com/jose-Abel/Cryptochain.git
+
+Or can download it as a zip file and extracting it in your machine
+
 ## Live version
 
-https://jose-abel-lottery-smart-contract.netlify.app/
 
-### Setup
+## Setup
+
+After getting the files, in the root directory type the commands:
+
+npm run dev
+
+## Tests
+
+The test where created with truffle library, so in order to run it need to download first the local Ganache network running by downloading Ganache
+
+After installing Ganache, run the tests by typing the command:
+
+truffle test
+
 
 ## 📝 License
 

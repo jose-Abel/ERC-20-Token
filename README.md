@@ -45,9 +45,9 @@ npm run dev
 
 ## Tests
 
-The test where created with truffle library, so in order to run it need to download first the local Ganache network running by downloading Ganache
+The test where created with truffle library, so in order to run it need to have the local Ganache network running by downloading and installing Ganache.
 
-After installing Ganache, run the tests by typing the command:
+After downloading and installing Ganache, run the tests by typing the command:
 
 truffle test
 

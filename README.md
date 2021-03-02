@@ -27,12 +27,13 @@ Smart contract project built in the Rinkeby Test Network for Ethereum. The contr
 
 To download the project either can do it with with git clone command:
 
-git clone https://github.com/jose-Abel/Cryptochain.git
+git clone https://github.com/jose-Abel/ERC-20-Token.git
 
 Or can download it as a zip file and extracting it in your machine
 
-## Live version
+To interact with the live version can get the Metamask wallet and change the settings for the Rinkeby network, once having Eth in the Rinkeby network can test the purchase of the token.
 
+## Live version
 
 ## Setup
 
@@ -47,7 +48,6 @@ The test where created with truffle library, so in order to run it need to downl
 After installing Ganache, run the tests by typing the command:
 
 truffle test
-
 
 ## 📝 License
 
